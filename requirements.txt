@@ -1,1 +1,6 @@
 pandas>=2.0.0
+numpy>=1.24.0
+
+# Optional dependencies for live trading
+# alpaca-py>=0.20.0  # Uncomment for Alpaca broker integration
+# yfinance>=0.2.0    # Uncomment for Yahoo Finance data source
