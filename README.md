@@ -11,6 +11,7 @@ A comprehensive quantitative trading bot with backtesting, walk-forward validati
 
 - [Features](#features)
 - [Installation](#installation)
+- [Sector Recommendations App](#sector-recommendations-app)
 - [Quick Start](#quick-start)
 - [Usage Guide](#usage-guide)
 - [Strategy Parameters](#strategy-parameters)
@@ -34,6 +35,7 @@ A comprehensive quantitative trading bot with backtesting, walk-forward validati
 - 📊 **Walk-Forward Validation** - Robust out-of-sample testing with rolling windows
 - 📈 **Multi-Asset Portfolios** - Trade multiple assets simultaneously
 - ⚖️ **Risk Parity Sizing** - Equal risk contribution position sizing across assets
+- 📌 **Sector Recommendations** - Interactive app: what to invest in, by sector, with math-backed reasoning
 
 ## Installation
 
@@ -71,6 +73,46 @@ Or install all optional dependencies:
 ```bash
 pip install alpaca-py yfinance
 ```
+
+## Sector Recommendations App
+
+An **interactive web app** that recommends what to invest in across **11 sectors**, with **mathematical reasoning** and **actual data**.
+
+### Sectors
+
+Financials · Information Technology · Health Care · Consumer Discretionary · Consumer Staples · Energy · Industrials · Materials · Communication Services · Real Estate · Utilities
+
+### What it does
+
+- **Rank sectors** by a quantitative score (average Sharpe of bullish tickers).
+- **Show ETF + representative stocks** per sector (e.g. XLK, AAPL, MSFT, NVDA for Tech).
+- **Explain why** to invest: price, fast/slow EMA, trend (bullish/bearish), volatility targeting, backtest metrics (return, Sharpe, drawdown), and a concise recommendation.
+
+### Run the app
+
+**Streamlit UI (recommended):**
+```bash
+pip install -r requirements.txt
+streamlit run app.py
+```
+
+Then open **http://localhost:8501** in your browser.
+
+- **All Sectors**: Ranked sectors table + drill-down by sector.
+- **Single Sector**: Pick one sector, see ETF + stocks and “Why invest?” per ticker.
+- **Lookup Ticker**: Analyze any symbol (e.g. AAPL, SPY) with full reasoning.
+
+**Optional – API only:**
+```bash
+uvicorn api.main:app --reload
+```
+
+- `GET /sectors` – list sectors  
+- `GET /sectors/analyze` – analyze all sectors  
+- `GET /sectors/{id}/analyze` – analyze one sector  
+- `GET /tickers/{symbol}` – analyze one ticker  
+
+API docs: **http://localhost:8000/docs**
 
 ## Quick Start
 
@@ -333,6 +375,10 @@ python -m src.trading_bot \
 
 ```
 Quantitative-Trading-Bot/
+├── app.py                  # Streamlit sector recommendations UI
+├── api/
+│   ├── __init__.py
+│   └── main.py             # FastAPI sector/ticker analysis API
 ├── src/
 │   ├── __init__.py
 │   ├── trading_bot.py      # Core strategy, backtest, CLI
@@ -340,13 +386,15 @@ Quantitative-Trading-Bot/
 │   ├── broker.py           # Broker API abstractions
 │   ├── walk_forward.py     # Walk-forward validation
 │   ├── portfolio.py        # Multi-asset portfolio management
-│   └── live_trading.py     # Live trading engine
+│   ├── live_trading.py     # Live trading engine
+│   ├── sectors.py          # Sector definitions and tickers
+│   └── sector_analysis.py  # Sector/ticker analysis + reasoning
 ├── path/
 │   └── to/
 │       └── data.csv        # Example data file
 ├── requirements.txt        # Python dependencies
-├── README.md              # This file
-└── QUICK_START.md         # Quick reference guide
+├── README.md               # This file
+└── QUICK_START.md          # Quick reference guide
 ```
 
 ## Command-Line Reference
