@@ -137,7 +137,7 @@ elif mode == "Single Sector":
 
 else:
     # Lookup Ticker
-    sym = st.text_input("Ticker symbol", value="AAPL", max_chars=10").strip().upper()
+    sym = st.text_input("Ticker symbol", value="AAPL", max_chars=10).strip().upper()
     if not sym:
         st.warning("Enter a ticker.")
         st.stop()
