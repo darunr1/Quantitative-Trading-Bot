@@ -9,16 +9,6 @@ pip install -r requirements.txt
 pip install alpaca-py
 ```
 
-## Sector Recommendations App (What to Invest In)
-
-Interactive app: sectors, stocks, and **why** to invest (with math & data).
-
-```bash
-streamlit run app.py
-```
-
-Then open **http://localhost:8501**. Use **All Sectors**, **Single Sector**, or **Lookup Ticker**.
-
 ## Basic Usage Examples
 
 ### 1. Simple Backtest
@@ -73,11 +63,3 @@ python -m src.trading_bot portfolio_data.csv \
 | `walk-forward` | Rolling train/test validation | CSV |
 | `live` | Real-time trading | Alpaca, Yahoo |
 | `portfolio` | Multi-asset with risk parity | CSV, Yahoo |
-
-## Sector App
-
-| View | Description |
-|------|-------------|
-| **All Sectors** | Ranked sectors; drill down by sector |
-| **Single Sector** | One sector: ETF + stocks, “Why invest?” |
-| **Lookup Ticker** | Analyze any symbol (e.g. AAPL, SPY) |
